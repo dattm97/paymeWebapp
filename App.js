@@ -1,31 +1,22 @@
-import React, {useState} from 'react';
-import {Button, SafeAreaView} from 'react-native';
-import WebView from 'react-native-webview';
-import useStaticServer from './src/services/StaticServer'; // add this line
+import React from 'react';
+import {SafeAreaView, Text, TouchableOpacity} from 'react-native';
+import {useDownloadModule} from './src/services/useDownloadModule';
+import {moduleList} from './src/DUMMY';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {Home} from './src/scrreens/Home';
+import {Module} from './src/scrreens/Module';
 
 const App = () => {
-  const [url] = useStaticServer(); // add this line
-  const [isOpen, setIsOpen] = useState(false); // add this line
-
-  console.log('===url', url);
-
+  useDownloadModule({moduleList});
+  const Stack = createNativeStackNavigator();
   return (
-    <SafeAreaView style={{flex: 1}}>
-      <Button
-        title={isOpen ? 'Tắt' : 'Bấm'}
-        onPress={() => setIsOpen(!isOpen)}
-      />
-      {isOpen && (
-        <WebView
-          domStorageEnabled
-          allowFileAccess
-          originWhitelist={['*']}
-          source={{uri: url}}
-          style={{flex: 1}}
-          onNavigationStateChange={state => console.log(state)}
-        />
-      )}
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name={'Home'} component={Home} />
+        <Stack.Screen name={'Module'} component={Module} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 

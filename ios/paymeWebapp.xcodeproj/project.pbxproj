@@ -12,7 +12,7 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		26C7D5CA832EF92720CB7E9A /* libPods-paymeWebapp-paymeWebappTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B840C7AA96BC170526B142F0 /* libPods-paymeWebapp-paymeWebappTests.a */; };
-		5370AF4528ADD4890080F552 /* www in Resources */ = {isa = PBXBuildFile; fileRef = 5370AF4428ADD4890080F552 /* www */; };
+		53D072D828AE0822007F4B08 /* www in Resources */ = {isa = PBXBuildFile; fileRef = 53D072D728AE0822007F4B08 /* www */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		981FAF50F0331E9ACEE30A0B /* libPods-paymeWebapp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 35ABBBFE48C352D2D6653724 /* libPods-paymeWebapp.a */; };
 /* End PBXBuildFile section */
@@ -41,7 +41,7 @@
 		231B52ECD0D2EA829F6B3B02 /* Pods-paymeWebapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-paymeWebapp.debug.xcconfig"; path = "Target Support Files/Pods-paymeWebapp/Pods-paymeWebapp.debug.xcconfig"; sourceTree = "<group>"; };
 		35ABBBFE48C352D2D6653724 /* libPods-paymeWebapp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-paymeWebapp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		44F5D77F9AAC208F5D36B62E /* Pods-paymeWebapp-paymeWebappTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-paymeWebapp-paymeWebappTests.release.xcconfig"; path = "Target Support Files/Pods-paymeWebapp-paymeWebappTests/Pods-paymeWebapp-paymeWebappTests.release.xcconfig"; sourceTree = "<group>"; };
-		5370AF4428ADD4890080F552 /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; name = www; path = ../assets/www; sourceTree = "<group>"; };
+		53D072D728AE0822007F4B08 /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; name = www; path = ../assets/www; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = paymeWebapp/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B840C7AA96BC170526B142F0 /* libPods-paymeWebapp-paymeWebappTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-paymeWebapp-paymeWebappTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -118,7 +118,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				5370AF4428ADD4890080F552 /* www */,
+				53D072D728AE0822007F4B08 /* www */,
 				13B07FAE1A68108700A75B9A /* paymeWebapp */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* paymeWebappTests */,
@@ -245,7 +245,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5370AF4528ADD4890080F552 /* www in Resources */,
+				53D072D828AE0822007F4B08 /* www in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);

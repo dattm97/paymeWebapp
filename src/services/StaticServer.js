@@ -3,7 +3,7 @@ import {Platform} from 'react-native';
 import StaticServer from 'react-native-static-server';
 import RNFS from 'react-native-fs';
 
-const PORT = 8080;
+const PORT = 3000;
 
 const useStaticServer = () => {
   const [url, setUrl] = useState(null);
@@ -20,8 +20,10 @@ const useStaticServer = () => {
       await RNFS.mkdir(RNFS.DocumentDirectoryPath + '/www');
       await [
         'www/index.html',
-        'www/main.css',
-        'www/main.js',
+        // static file
+        'www/static/css/main.5ecd60fb.chunk.css',
+        'www/static/css/main.5ecd60fb.chunk.css',
+        // 'www/main.js',
         // add more files to copy here
       ].forEach(async file => {
         await RNFS.copyFileAssets(

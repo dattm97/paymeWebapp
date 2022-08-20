@@ -11,10 +11,10 @@ export const useDownloadModule = ({moduleList}) => {
         path: dirs.DocumentDir + `/module${index}.zip`,
       })
         .fetch('GET', item?.link)
-        .progress((received, total) => {
-        })
+        .progress((received, total) => console.log('===received', received))
         .then(res => {
           const rawPath = res.path();
+          console.log('==rawPath', rawPath);
           unzip(rawPath, RNFS.DocumentDirectoryPath + '/')
             .then(async path => {
               let exists = await RNFS.exists(rawPath);
@@ -25,8 +25,7 @@ export const useDownloadModule = ({moduleList}) => {
                 console.log('File Not Available');
               }
             })
-            .catch(err => {
-            });
+            .catch(err => {});
         });
     });
   }

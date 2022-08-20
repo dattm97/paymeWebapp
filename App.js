@@ -4,8 +4,8 @@ import {useDownloadModule} from './src/services/useDownloadModule';
 import {moduleList} from './src/DUMMY';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {Home} from './src/scrreens/Home';
-import {Module} from './src/scrreens/Module';
+import {Home} from './src/screens/Home';
+import {Module} from './src/screens/Module';
 
 const App = () => {
   useDownloadModule({moduleList});

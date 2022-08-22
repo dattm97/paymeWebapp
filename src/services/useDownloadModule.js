@@ -11,8 +11,7 @@ export const useDownloadModule = ({moduleList}) => {
         path: dirs.DocumentDir + `/module${index}.zip`,
       })
         .fetch('GET', item?.link)
-        .progress((received, total) => {
-        })
+        .progress((received, total) => {})
         .then(res => {
           const rawPath = res.path();
           unzip(rawPath, RNFS.DocumentDirectoryPath + '/')
@@ -25,8 +24,7 @@ export const useDownloadModule = ({moduleList}) => {
                 console.log('File Not Available');
               }
             })
-            .catch(err => {
-            });
+            .catch(err => {});
         });
     });
   }

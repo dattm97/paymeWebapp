@@ -10,5 +10,5 @@ export const createOpenWalletURL = ({domain, config}) => {
   };
   const encrypted = encrypt(configs);
 
-  return 'getDataWithAction/' + encodeURIComponent(encrypted);
+  return encodeURIComponent(encrypted);
 };

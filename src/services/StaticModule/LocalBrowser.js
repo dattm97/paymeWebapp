@@ -1,23 +1,33 @@
-import React from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {SafeAreaView, Text} from 'react-native';
 import WebView from 'react-native-webview';
 import useStaticServer from './useStaticServer';
+import RNFS from 'react-native-fs';
 
 export const LocalBrowser = ({moduleName, suffix}) => {
   const [url] = useStaticServer({moduleName, suffix});
-  console.log('===url', url);
+  const webview = useRef();
+
   if (!url) {
     return null;
   }
   return (
     <SafeAreaView style={{flex: 1}}>
       <WebView
+        ref={webview}
         startInLoadingState
         javaScriptEnabled
+        onMessage={e => {}}
         originWhitelist={['*']}
         source={{uri: url}}
+        injectedJavaScriptBeforeContentLoaded={`(function() {
+          window.localStorage.setItem('staticWebviewToken', '${suffix}');
+          void(0);
+        })()`}
         style={{flex: 1}}
-        onNavigationStateChange={state => console.log(state)}
+        onNavigationStateChange={state => {
+          console.log(state);
+        }}
         onHttpError={syntheticEvent => {
           const {nativeEvent} = syntheticEvent;
           console.log('====nativeEvent', nativeEvent);

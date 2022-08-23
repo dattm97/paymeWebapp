@@ -12,6 +12,8 @@ import {encryptConnectToken} from '../helper';
 import {ACCOUNT_STATUS} from '../constant/account.constant';
 import {createOpenWalletURL} from '../action/openWallet';
 import {Config} from '../config/account.config';
+import {useDownloadModule} from '../services/useDownloadModule';
+import {moduleList} from '../DUMMY';
 
 export const Home = () => {
   const navigation = useNavigation();
@@ -20,6 +22,7 @@ export const Home = () => {
   const [phone, onChangePhone] = useState('');
   const [config, setConfig] = useState(Config);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [process, enable] = useDownloadModule({moduleList});
 
   const onLogin = () => {
     if (userId && phone) {
@@ -131,7 +134,7 @@ export const Home = () => {
 
   const onOpenWallet = () => {
     navigation.navigate('Module', {
-      name: 'sdkWebapp-main',
+      name: 'sdkWebapp3-main',
       suffix: createOpenWalletURL({config: config}),
     });
   };
@@ -170,23 +173,18 @@ export const Home = () => {
 
             {isLoggedIn && (
               <View style={styles.functionGroup}>
-                <TouchableOpacity onPress={onOpenWallet} style={styles.button}>
+                {!enable && <Text>{process}</Text>}
+                <TouchableOpacity
+                  onPress={enable ? onOpenWallet : () => {}}
+                  style={[
+                    styles.button,
+                    {backgroundColor: enable ? 'blue' : 'grey'},
+                  ]}>
                   <Text style={styles.titleButton}>Open Wallet</Text>
                 </TouchableOpacity>
                 <Text>{`Đã login: ${JSON.stringify(config)}`}</Text>
               </View>
             )}
-            {/* {moduleList.map(item => (
-          <TouchableOpacity
-            key={item.name}
-            onPress={() =>
-              navigation.navigate('Module', {
-                name: item.name,
-              })
-            }>
-            <Text>{item.name}</Text>
-          </TouchableOpacity>
-        ))} */}
           </View>
         </ScrollView>
       </TouchableWithoutFeedback>
@@ -203,7 +201,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   button: {
-    backgroundColor: 'blue',
     borderRadius: 8,
     padding: 16,
     alignItems: 'center',

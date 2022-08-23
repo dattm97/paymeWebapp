@@ -1,9 +1,11 @@
 import RNFetchBlob from 'rn-fetch-blob';
 import {unzip} from 'react-native-zip-archive';
 import RNFS from 'react-native-fs';
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 
 export const useDownloadModule = ({moduleList}) => {
+  const [process, setProcess] = useState('');
+  const [enable, setEnabled] = useState(false);
   async function downloadSource() {
     const dirs = RNFetchBlob.fs.dirs;
     moduleList?.map((item, index) => {
@@ -11,7 +13,7 @@ export const useDownloadModule = ({moduleList}) => {
         path: dirs.DocumentDir + `/module${index}.zip`,
       })
         .fetch('GET', item?.link)
-        .progress((received, total) => console.log('===received', received))
+        .progress((received, total) => setProcess(`${received}/${total}`))
         .then(res => {
           const rawPath = res.path();
           console.log('==rawPath', rawPath);
@@ -24,6 +26,21 @@ export const useDownloadModule = ({moduleList}) => {
               } else {
                 console.log('File Not Available');
               }
+              const checkRoute = await RNFS.exists(
+                RNFS.DocumentDirectoryPath + `/${item.name}/getDataWithAction`,
+              );
+              if (!checkRoute) {
+                await RNFS.mkdir(
+                  RNFS.DocumentDirectoryPath +
+                    `/${item.name}/getDataWithAction`,
+                );
+                await RNFS.copyFile(
+                  RNFS.DocumentDirectoryPath + `/${item.name}/index.html`,
+                  RNFS.DocumentDirectoryPath +
+                    `/${item.name}/getDataWithAction/index.html`,
+                );
+              }
+              setEnabled(true);
             })
             .catch(err => {});
         });
@@ -33,4 +50,6 @@ export const useDownloadModule = ({moduleList}) => {
   useEffect(() => {
     downloadSource();
   }, []);
+
+  return [process, enable];
 };

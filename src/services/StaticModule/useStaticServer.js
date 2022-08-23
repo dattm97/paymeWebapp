@@ -10,14 +10,13 @@ const useStaticServer = ({moduleName, suffix}) => {
     if (!server) {
       const startServer = async () => {
         const path = RNFS.DocumentDirectoryPath + `/${moduleName}/`;
-        console.log('DEBUG_USE_STATIC_SERVER: ', path);
         const _server = new StaticServer(0, path, {
           localOnly: true,
           keepAlive: true,
         });
         _server.start().then(_url => {
           if (suffix) {
-            setUrl(`${_url}/${suffix}`);
+            setUrl(`${_url}/getDataWithAction`);
           } else {
             setUrl(`${_url}`);
           }

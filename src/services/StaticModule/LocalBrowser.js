@@ -24,6 +24,7 @@ export const LocalBrowser = ({moduleName, suffix}) => {
     <SafeAreaView style={{flex: 1}}>
       <WebView
         ref={webview}
+        bounces={false}
         javaScriptEnabled
         onMessage={onMessage}
         originWhitelist={['*']}

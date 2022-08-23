@@ -27,17 +27,16 @@ export const useDownloadModule = ({moduleList}) => {
                 console.log('File Not Available');
               }
               const checkRoute = await RNFS.exists(
-                RNFS.DocumentDirectoryPath + `/${item.name}/getDataWithAction`,
+                RNFS.DocumentDirectoryPath + `/${item.name}/staticSDK`,
               );
               if (!checkRoute) {
                 await RNFS.mkdir(
-                  RNFS.DocumentDirectoryPath +
-                    `/${item.name}/getDataWithAction`,
+                  RNFS.DocumentDirectoryPath + `/${item.name}/staticSDK`,
                 );
                 await RNFS.copyFile(
                   RNFS.DocumentDirectoryPath + `/${item.name}/index.html`,
                   RNFS.DocumentDirectoryPath +
-                    `/${item.name}/getDataWithAction/index.html`,
+                    `/${item.name}/staticSDK/index.html`,
                 );
               }
               setEnabled(true);

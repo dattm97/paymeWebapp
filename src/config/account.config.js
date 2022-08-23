@@ -19,7 +19,7 @@ export const Config = {
   deviceId: getUniqueId(),
   env: 'sandbox',
   partner: {
-    type: 'web',
+    type: 'PAYME',
   },
   configColor: ['#4430b3', '#6756d6'],
   appId: '95',

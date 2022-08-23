@@ -1,23 +1,31 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {SafeAreaView, Text} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import React, {useRef} from 'react';
+import {SafeAreaView} from 'react-native';
 import WebView from 'react-native-webview';
 import useStaticServer from './useStaticServer';
-import RNFS from 'react-native-fs';
 
 export const LocalBrowser = ({moduleName, suffix}) => {
+  const navigation = useNavigation();
   const [url] = useStaticServer({moduleName, suffix});
   const webview = useRef();
 
   if (!url) {
     return null;
   }
+  const onMessage = event => {
+    const data = JSON.parse(event.nativeEvent.data);
+
+    if (data?.type === 'onClose') {
+      navigation.navigate('Home');
+    }
+  };
+
   return (
     <SafeAreaView style={{flex: 1}}>
       <WebView
         ref={webview}
-        startInLoadingState
         javaScriptEnabled
-        onMessage={e => {}}
+        onMessage={onMessage}
         originWhitelist={['*']}
         source={{uri: url}}
         injectedJavaScriptBeforeContentLoaded={`(function() {

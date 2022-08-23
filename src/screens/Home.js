@@ -18,8 +18,8 @@ import {moduleList} from '../DUMMY';
 export const Home = () => {
   const navigation = useNavigation();
 
-  const [userId, onChangeUserId] = useState('');
-  const [phone, onChangePhone] = useState('');
+  const [userId, onChangeUserId] = useState('0795550300');
+  const [phone, onChangePhone] = useState('0795550300');
   const [config, setConfig] = useState(Config);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [process, enable] = useDownloadModule({moduleList});

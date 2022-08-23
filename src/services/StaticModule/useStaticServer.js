@@ -16,7 +16,7 @@ const useStaticServer = ({moduleName, suffix}) => {
         });
         _server.start().then(_url => {
           if (suffix) {
-            setUrl(`${_url}/getDataWithAction`);
+            setUrl(`${_url}/staticSDK`);
           } else {
             setUrl(`${_url}`);
           }

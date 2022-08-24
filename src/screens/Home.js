@@ -33,10 +33,10 @@ export const Home = () => {
   }, []);
 
   useEffect(() => {
-    if (isLoggedIn) {
+    if (isLoggedIn && enable) {
       onOpenWallet();
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, enable]);
 
   // const onLogin = () => {
   //   if (userId && phone) {
@@ -121,7 +121,7 @@ export const Home = () => {
   };
 
   const onOpenWallet = () => {
-    navigation.navigate('Module', {
+    navigation.replace('Module', {
       name: 'sdkWebapp3-main',
       suffix: createOpenWalletURL({config: config}),
     });
@@ -183,7 +183,7 @@ export const Home = () => {
             onPress={enable ? onOpenWallet : () => {}}
             style={[
               styles.button,
-              {backgroundColor: enable ? 'blue' : 'grey', marginTop: 16},
+              {backgroundColor: enable ? 'blue' : 'grey'},
             ]}>
             <Text style={styles.titleButton}>Open Wallet</Text>
           </TouchableOpacity>
@@ -205,6 +205,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 16,
     alignItems: 'center',
+    marginTop: 16,
   },
   titleButton: {
     color: 'white',

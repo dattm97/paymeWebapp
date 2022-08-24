@@ -1,24 +1,29 @@
-import {useNavigation} from '@react-navigation/native';
-import React, {useRef} from 'react';
-import {SafeAreaView} from 'react-native';
+import React, {useEffect, useRef} from 'react';
+import {BackHandler, SafeAreaView} from 'react-native';
 import WebView from 'react-native-webview';
 import useStaticServer from './useStaticServer';
 
 export const LocalBrowser = ({moduleName, suffix}) => {
-  const navigation = useNavigation();
   const [url] = useStaticServer({moduleName, suffix});
   const webview = useRef();
+
+  useEffect(() => {
+    const backAction = () => {
+      webview.current?.goBack();
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    );
+
+    return () => backHandler.remove();
+  }, []);
 
   if (!url) {
     return null;
   }
-  const onMessage = event => {
-    const data = JSON.parse(event.nativeEvent.data);
-
-    if (data?.type === 'onClose') {
-      navigation.navigate('Home');
-    }
-  };
 
   return (
     <SafeAreaView style={{flex: 1}}>
@@ -26,7 +31,7 @@ export const LocalBrowser = ({moduleName, suffix}) => {
         ref={webview}
         bounces={false}
         javaScriptEnabled
-        onMessage={onMessage}
+        onMessage={e => {}}
         originWhitelist={['*']}
         source={{uri: url}}
         injectedJavaScriptBeforeContentLoaded={`(function() {

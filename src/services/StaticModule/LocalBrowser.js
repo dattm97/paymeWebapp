@@ -34,22 +34,6 @@ export const LocalBrowser = ({moduleName, suffix}) => {
           void(0);
         })()`}
         style={{flex: 1}}
-        onNavigationStateChange={state => {
-          console.log(state);
-        }}
-        onHttpError={syntheticEvent => {
-          const {nativeEvent} = syntheticEvent;
-          console.log('====nativeEvent', nativeEvent);
-          console.warn(
-            'WebView received error status code: ',
-            nativeEvent.statusCode,
-          );
-        }}
-        onError={syntheticEvent => {
-          const {nativeEvent} = syntheticEvent;
-          console.warn('WebView error: ', nativeEvent);
-        }}
-        renderError={errorName => <Text>{errorName}</Text>}
       />
     </SafeAreaView>
   );

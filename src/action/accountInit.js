@@ -17,7 +17,5 @@ export const accountInit = async params => {
     },
   );
 
-  console.log('===response', response);
-
   return handleResponse(response);
 };

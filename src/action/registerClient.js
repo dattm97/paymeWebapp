@@ -21,7 +21,5 @@ export const registerClient = async () => {
     },
   );
 
-  console.log('===response', response);
-
   return handleResponse(response);
 };

@@ -9,7 +9,6 @@ import {Keyboard} from 'react-native';
 import {registerClient} from '../action/registerClient';
 import {accountInit} from '../action/accountInit';
 import {encryptConnectToken} from '../helper';
-import {ACCOUNT_STATUS} from '../constant/account.constant';
 import {createOpenWalletURL} from '../action/openWallet';
 import {Config} from '../config/account.config';
 import {useDownloadModule} from '../services/useDownloadModule';
@@ -40,7 +39,7 @@ export const Home = () => {
         timestamp: Date.now(),
         phone,
       }),
-      'b5d8cf6c30d9cb4a861036bdde44c137',
+      Config.keyEncrypt,
     );
 
     const responseRegisterClient = await registerClient();
@@ -48,8 +47,7 @@ export const Home = () => {
     if (responseRegisterClient.status) {
       if (responseRegisterClient?.response?.Client?.Register?.succeeded) {
         const responseAccountInit = await accountInit({
-          appToken:
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHBJZCI6OTUsImlhdCI6MTY1MTczMjM0Nn0.TFsg9wizgtWa7EbGzrjC2Gn55TScsJzKGjfeN78bhlg',
+          appToken: Config.appToken,
           connectToken,
           clientId:
             responseRegisterClient?.response?.Client?.Register?.clientId,
@@ -60,35 +58,12 @@ export const Home = () => {
             responseAccountInit.response?.OpenEWallet?.Init?.accessToken ?? '';
           const updateToken =
             responseAccountInit.response?.OpenEWallet?.Init?.updateToken;
-          let accountStatus = ACCOUNT_STATUS.NOT_ACTIVATED;
 
           if (responseAccountInit.response?.OpenEWallet?.Init?.succeeded) {
-            if (
-              responseAccountInit.response?.OpenEWallet?.Init?.kyc &&
-              responseAccountInit.response?.OpenEWallet?.Init?.kyc?.kycId
-            ) {
-              if (
-                responseAccountInit.response?.OpenEWallet?.Init?.kyc?.state ===
-                'APPROVED'
-              ) {
-                accountStatus = ACCOUNT_STATUS.KYC_APPROVED;
-              } else if (
-                responseAccountInit.response?.OpenEWallet?.Init?.kyc?.state ===
-                'PENDING'
-              ) {
-                accountStatus = ACCOUNT_STATUS.KYC_REVIEW;
-              } else {
-                accountStatus = ACCOUNT_STATUS.KYC_REJECTED;
-              }
-            } else {
-              accountStatus = ACCOUNT_STATUS.NOT_KYC;
-            }
-
             setConfig({
               ...config,
               ...responseAccountInit.response?.OpenEWallet?.Init,
               connectToken,
-              accountStatus,
               phone: phone
                 ? phone
                 : responseAccountInit.response?.OpenEWallet?.Init?.phone ?? '',
@@ -101,7 +76,6 @@ export const Home = () => {
               ...config,
               ...responseAccountInit.response?.OpenEWallet?.Init,
               connectToken,
-              accountStatus,
               phone: phone
                 ? phone
                 : responseAccountInit.response?.OpenEWallet?.Init?.phone ?? '',
@@ -114,7 +88,6 @@ export const Home = () => {
               responseAccountInit.response?.OpenEWallet?.Init?.message,
             );
           }
-          console.log('==responseAccountInit', responseAccountInit);
         } else {
           if (responseAccountInit.response[0]?.extensions?.code === 401) {
             Alert.alert(responseAccountInit.response[0]?.message);

@@ -20,7 +20,6 @@ const useStaticServer = ({moduleName, suffix}) => {
           } else {
             setUrl(`${_url}`);
           }
-          // setUrl(`${_url}`);
         });
         setServer(_server);
       };

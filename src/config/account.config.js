@@ -23,4 +23,5 @@ export const Config = {
   },
   configColor: ['#4430b3', '#6756d6'],
   appId: '95',
+  keyEncrypt: 'b5d8cf6c30d9cb4a861036bdde44c137',
 };

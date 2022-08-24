@@ -1,10 +1,11 @@
-import React from 'react';
-import {SafeAreaView, ScrollView, Text, TouchableOpacity} from 'react-native';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, {useEffect} from 'react';
+import {SafeAreaView} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {TextInput, View, StyleSheet, Button} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import {useState} from 'react';
 import {Alert} from 'react-native';
-import {TouchableWithoutFeedback} from 'react-native';
+// import {TouchableWithoutFeedback} from 'react-native';
 import {Keyboard} from 'react-native';
 import {registerClient} from '../action/registerClient';
 import {accountInit} from '../action/accountInit';
@@ -13,23 +14,38 @@ import {createOpenWalletURL} from '../action/openWallet';
 import {Config} from '../config/account.config';
 import {useDownloadModule} from '../services/useDownloadModule';
 import {moduleList} from '../DUMMY';
+import {ActivityIndicator} from 'react-native';
+import {Text} from 'react-native';
+import { TouchableOpacity } from 'react-native';
 
 export const Home = () => {
   const navigation = useNavigation();
 
-  const [userId, onChangeUserId] = useState('0795550300');
-  const [phone, onChangePhone] = useState('0795550300');
+  const [userId] = useState('0795550300');
+  const [phone] = useState('0795550300');
   const [config, setConfig] = useState(Config);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [process, enable] = useDownloadModule({moduleList});
 
-  const onLogin = () => {
+  useEffect(() => {
     if (userId && phone) {
       init();
-    } else {
-      Alert.alert('Vui lòng nhập đủ thông tin');
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      onOpenWallet();
+    }
+  }, [isLoggedIn]);
+
+  // const onLogin = () => {
+  //   if (userId && phone) {
+  //     init();
+  //   } else {
+  //     Alert.alert('Vui lòng nhập đủ thông tin');
+  //   }
+  // };
 
   const init = async () => {
     Keyboard.dismiss();
@@ -114,7 +130,7 @@ export const Home = () => {
 
   return (
     <SafeAreaView style={styles.safeAreaView}>
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      {/* <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <ScrollView>
           <View style={styles.container}>
             <View style={styles.login}>
@@ -155,12 +171,25 @@ export const Home = () => {
                   ]}>
                   <Text style={styles.titleButton}>Open Wallet</Text>
                 </TouchableOpacity>
-                <Text>{`Đã login: ${JSON.stringify(config)}`}</Text>
               </View>
             )}
           </View>
         </ScrollView>
-      </TouchableWithoutFeedback>
+      </TouchableWithoutFeedback> */}
+      <View style={styles.container}>
+        {!enable && <Text>{`Downloaded: ${process}`}</Text>}
+        {!isLoggedIn && <ActivityIndicator size="large" />}
+        {isLoggedIn && (
+          <TouchableOpacity
+            onPress={enable ? onOpenWallet : () => {}}
+            style={[
+              styles.button,
+              {backgroundColor: enable ? 'blue' : 'grey', marginTop: 16},
+            ]}>
+            <Text style={styles.titleButton}>Open Wallet</Text>
+          </TouchableOpacity>
+        )}
+      </View>
     </SafeAreaView>
   );
 };

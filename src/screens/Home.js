@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect} from 'react';
-import {SafeAreaView} from 'react-native';
+import {SafeAreaView, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {View, StyleSheet} from 'react-native';
 import {useState} from 'react';
@@ -16,7 +16,6 @@ import {useDownloadModule} from '../services/useDownloadModule';
 import {moduleList} from '../DUMMY';
 import {ActivityIndicator} from 'react-native';
 import {Text} from 'react-native';
-import { TouchableOpacity } from 'react-native';
 
 export const Home = () => {
   const navigation = useNavigation();

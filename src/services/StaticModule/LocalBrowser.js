@@ -18,7 +18,8 @@ export const LocalBrowser = ({moduleName, suffix}) => {
       backAction,
     );
 
-    return () => backHandler.remove();
+    return () =>
+      backHandler.removeEventListener('hardwareBackPress', backAction);
   }, []);
 
   if (!url) {
@@ -31,6 +32,9 @@ export const LocalBrowser = ({moduleName, suffix}) => {
         ref={webview}
         bounces={false}
         javaScriptEnabled
+        allowsBackForwardNavigationGestures
+        scalesPageToFit
+        scrollEnabled={false}
         onMessage={e => {}}
         originWhitelist={['*']}
         source={{uri: url}}

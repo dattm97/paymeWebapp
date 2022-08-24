@@ -347,7 +347,7 @@ PODS:
     - React-Core
   - RNFS (2.20.0):
     - React-Core
-  - RNScreens (3.16.0):
+  - RNScreens (3.15.0):
     - React-Core
     - React-RCTImage
   - RNZipArchive (6.0.8):
@@ -517,7 +517,7 @@ SPEC CHECKSUMS:
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   DoubleConversion: cf9b38bf0b2d048436d9a82ad2abe1404f11e7de
   FBLazyVector: 49cbe4b43e445b06bf29199b6ad2057649e4c8f5
-  FBReactNativeSpec: 1e575417ad05b8a436dc10e1d38a6747864ac467
+  FBReactNativeSpec: 766526bff21e1511809fbf642bf51f3b76d533d3
   Flipper: 1bd2db48dcc31e4b167b9a33ec1df01c2ded4893
   Flipper-DoubleConversion: 38631e41ef4f9b12861c67d17cb5518d06badc41
   Flipper-Folly: 755929a4f851b2fb2c347d533a23f191b008554c
@@ -558,7 +558,7 @@ SPEC CHECKSUMS:
   rn-fetch-blob: f065bb7ab7fb48dd002629f8bdcb0336602d3cba
   RNDeviceInfo: aad3c663b25752a52bf8fce93f2354001dd185aa
   RNFS: 4ac0f0ea233904cb798630b3c077808c06931688
-  RNScreens: ee31ecdf23fe81e93c74feaa086cf173d758ab58
+  RNScreens: 4a1af06327774490d97342c00aee0c2bafb497b7
   RNZipArchive: 3f89b114cfeb89dac027fc5c7afd7e58d3dc4ebf
   SSZipArchive: 62d4947b08730e4cda640473b0066d209ff033c9
   Yoga: 8c8436d4171c87504c648ae23b1d81242bdf3bbf
@@ -566,4 +566,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 6c4cb636948de45b6882e8521d17236a59e58fdf
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.11.3

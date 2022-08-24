@@ -30,7 +30,7 @@ export const Home = () => {
     if (userId && phone) {
       init();
     }
-  }, []);
+  }, [userId, phone]);
 
   useEffect(() => {
     if (isLoggedIn && enable) {
